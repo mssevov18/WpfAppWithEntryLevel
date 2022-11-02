@@ -1,0 +1,43 @@
+﻿<Window x:Class="WpfAppWithEntryLevel.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfAppWithEntryLevel"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="500" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="8*"/>
+        </Grid.ColumnDefinitions>
+
+        <ListView x:Name="ExerciseContainer" Grid.Column="0">
+            <ListView.ItemTemplate>
+                <DataTemplate DataType="IContainer">
+                    <Button x:Name="PickExerciseButton" Content="{Binding Path=Title}" Click="PickExerciseButton_Click" Command="{x:Null}"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <Grid x:Name="SolutionContainer" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="5*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0">
+                <Label x:Name="TitleLabel"/>
+                <Label x:Name="LinkLabel"/>
+            </StackPanel>
+
+            <TextBlock x:Name="SolutionBox" Margin="10 0 0 0" TextWrapping="Wrap" Grid.Column="0" Grid.Row="1"/>
+            <TextBlock x:Name="ResultBox" TextWrapping="Wrap" Grid.Column="1" Grid.Row="1"/>
+
+        </Grid>
+    </Grid>
+</Window>
