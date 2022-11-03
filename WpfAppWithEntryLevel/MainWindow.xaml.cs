@@ -36,6 +36,11 @@ namespace WpfAppWithEntryLevel
 
 			InitializeComponent();
 
+			TypesLabel.Content = "No Arguments";
+			ArgumentsBox.Text = "No Arguments";
+			ArgumentsBox.IsEnabled = false;
+			SendArgumentsButton.IsEnabled = false;
+
 			ExerciseContainer.ItemsSource = _exercises;
 		}
 
@@ -85,21 +90,27 @@ namespace WpfAppWithEntryLevel
 		private void SendArgumentsButton_Click(object sender, RoutedEventArgs e)
 		{
 			//Check data
-			_currentArgs = ArgumentsBox.Text.Split(", ").ToList<object>();
-			_container = _exercises.Find(e => e.Title == (string)(_exerciseButton).Content);
+			_container = _exercises
+				.Find(e => e.Title == (string)(_exerciseButton).Content);
+			int index = 0;
+			_currentArgs = ArgumentsBox.Text
+				.Trim()
+				.Split(",")
+				.Select(a => Convert.ChangeType(a.Trim(), _container.Arguments[index++]))
+				.ToList<object>();
 
-			StringBuilder @string = new StringBuilder();
-			int index = 1;
-			foreach (object item in _currentArgs)
-			{
-				if (index > _container.Arguments.Length)
-					break;
-				@string.Append(item.ToString() + "\n");
-				index++;
-			}
-			MessageBox.Show(@string.ToString());
+			//StringBuilder @string = new StringBuilder();
+			//index = 1;
+			//foreach (object item in _currentArgs)
+			//{
+			//	if (index > _container.Arguments.Length)
+			//		break;
+			//	@string.Append(item.ToString() + "\n");
+			//	index++;
+			//}
+			//MessageBox.Show(@string.ToString());
 
-			//ResultBox.Text = container.RunSolution(_currentArgs.ToArray());
+			ResultBox.Text = _container.RunSolution(_currentArgs.ToArray());
 		}
 
 		private void ArgumentsBox_KeyDown(object sender, KeyEventArgs e)
