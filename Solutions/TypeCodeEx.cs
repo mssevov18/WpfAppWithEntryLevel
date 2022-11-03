@@ -17,9 +17,9 @@ namespace Solutions
 				case TypeCode.Boolean:
 					return true;
 				case TypeCode.Char:
-					return "'n'";
+					return 'n';
 				case TypeCode.String:
-					return "\"Lorem\"";
+					return "Lorem";
 				case TypeCode.Double:
 					return 13.5d;
 			}
