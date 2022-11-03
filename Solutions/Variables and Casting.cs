@@ -23,9 +23,10 @@ $"\nfloat floatNumber = 30.78f;" +
 $"\ndouble doubleNumber = 45.1234d;" +
 $"\nbool boolean = true;" +
 $"\nchar charName = 'u';" +
-$"\nConsole.WriteLine();";
+$"\nConsole.WriteLine($\"{{intNumber}}, {{floatNumber}}, {{doubleNumber}}, {{boolean}}, {{charName}}\");";
+        public TypeCode[] Arguments => null;
 
-        public string RunSolution()
+        public string RunSolution(params object[] args)
         {
             int intNumber = 30;
             float floatNumber = 30.78f;

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -17,32 +18,94 @@ using Solutions;
 
 namespace WpfAppWithEntryLevel
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow : Window
-    {
-        List<IContainer> _exercises = new List<IContainer>();
-        public MainWindow()
-        {
-            _exercises.Add(new _01());
+	/// <summary>
+	/// Interaction logic for MainWindow.xaml
+	/// </summary>
+	public partial class MainWindow : Window
+	{
+		List<IContainer> _exercises = new List<IContainer>();
+		List<object> _currentArgs = new List<object>();
+		IContainer _container = null;
+		Button _exerciseButton = null;
 
-            InitializeComponent();
+		public MainWindow()
+		{
+			_exercises.Add(new _01());
+			_exercises.Add(new _02());
+			_exercises.Add(new _03());
 
-            ExerciseContainer.ItemsSource = _exercises;
-        }
+			InitializeComponent();
 
-        //REWORK!
-        private void PickExerciseButton_Click(object sender, RoutedEventArgs e)
-        {
-            //MessageBox.Show(sender.GetType().ToString() +"\n"+e.ToString()+"\n"+
-            //    _exercises.Find(e => e.Title == (string)((Button)sender).Content).Title);
+			ExerciseContainer.ItemsSource = _exercises;
+		}
 
-            IContainer container = _exercises.Find(e => e.Title == (string)((Button)sender).Content);
-            TitleLabel.Content = container.Title;
-            LinkLabel.Content = container.Link;
-            SolutionBox.Text = container.Solution;
-            ResultBox.Text = container.RunSolution();
-        }
-    }
+		//REWORK?
+		private void PickExerciseButton_Click(object sender, RoutedEventArgs e)
+		{
+			//MessageBox.Show(sender.GetType().ToString() +"\n"+e.ToString()+"\n"+
+			//    _exercises.Find(e => e.Title == (string)((Button)sender).Content).Title);
+
+			_currentArgs.Clear();
+			_exerciseButton = (Button)sender;
+			IContainer _container = _exercises.Find(e => e.Title == (string)_exerciseButton.Content);
+
+			TitleLabel.Content = _container.Title;
+			LinkLabel.Content = _container.Link;
+			SolutionBox.Text = _container.Solution;
+
+			if (_container.Arguments == null)
+			{
+				TypesLabel.Content = "No Arguments";
+				ArgumentsBox.Text = "No Arguments";
+				ArgumentsBox.IsEnabled = false;
+				SendArgumentsButton.IsEnabled = false;
+			}
+			else
+			{
+				StringBuilder LabelBuilder = new StringBuilder(), BoxBuilder = new StringBuilder();
+
+				foreach (TypeCode code in _container.Arguments)
+				{
+					LabelBuilder.Append(code.ToString() + ", ");
+					_currentArgs.Add(TypeCodeEx.GetDefaultValue(code));
+					BoxBuilder.Append(TypeCodeEx.GetDefaultValue(code) + ", ");
+				}
+				LabelBuilder.Remove(LabelBuilder.Length - 2, 2);
+				BoxBuilder.Remove(BoxBuilder.Length - 2, 2);
+
+				TypesLabel.Content = LabelBuilder.ToString();
+
+				ArgumentsBox.Text = BoxBuilder.ToString();
+				ArgumentsBox.IsEnabled = true;
+				SendArgumentsButton.IsEnabled = true;
+			}
+			ResultBox.Text = _container.RunSolution(_currentArgs.ToArray());
+		}
+
+		private void SendArgumentsButton_Click(object sender, RoutedEventArgs e)
+		{
+			//Check data
+			_currentArgs = ArgumentsBox.Text.Split(", ").ToList<object>();
+			_container = _exercises.Find(e => e.Title == (string)(_exerciseButton).Content);
+
+			StringBuilder @string = new StringBuilder();
+			int index = 1;
+			foreach (object item in _currentArgs)
+			{
+				if (index > _container.Arguments.Length)
+					break;
+				@string.Append(item.ToString() + "\n");
+				index++;
+			}
+			MessageBox.Show(@string.ToString());
+
+			//ResultBox.Text = container.RunSolution(_currentArgs.ToArray());
+		}
+
+		private void ArgumentsBox_KeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.Key == Key.Enter)
+				SendArgumentsButton_Click(sender, e);
+		}
+	}
 }
