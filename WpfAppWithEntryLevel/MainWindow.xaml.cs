@@ -33,9 +33,11 @@ namespace WpfAppWithEntryLevel
 			_exercises.Add(new _01());
 			_exercises.Add(new _02());
 			_exercises.Add(new _03());
+			_exercises.Add(new _04());
 
 			InitializeComponent();
 
+			SolutionContainer.Visibility = Visibility.Hidden;
 			TypesLabel.Content = "No Arguments";
 			ArgumentsBox.Text = "No Arguments";
 			ArgumentsBox.IsEnabled = false;
@@ -56,6 +58,7 @@ namespace WpfAppWithEntryLevel
 
 			TitleLabel.Content = _container.Title;
 			LinkLabel.Content = _container.Link;
+			StatementBox.Text = _container.Statement;
 			SolutionBox.Text = _container.Solution;
 
 			if (_container.Arguments == null)
@@ -84,6 +87,8 @@ namespace WpfAppWithEntryLevel
 				ArgumentsBox.IsEnabled = true;
 				SendArgumentsButton.IsEnabled = true;
 			}
+
+			SolutionContainer.Visibility = Visibility.Visible;
 			ResultBox.Text = _container.RunSolution(_currentArgs.ToArray());
 		}
 
