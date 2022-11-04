@@ -36,24 +36,29 @@
             <Border Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Padding="10,5,10,5" BorderBrush="Black" BorderThickness="1,1,1,0">
                 <StackPanel Orientation="Horizontal" >
                     <Label x:Name="TitleLabel"/>
-                    <Label x:Name="LinkLabel"/>
+                    <Label>
+                        <Hyperlink x:Name="HyperlinkLabel" Click="HyperlinkLabel_Click">
+                            <Label x:Name="LinkLabel"/>
+                        </Hyperlink>
+                    </Label>
+                    <!--<Label x:Name="LinkLabel" Hyperlink.Click="LinkLabel_Click"/>-->
                 </StackPanel>
             </Border>
 
             <Border Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Padding="10,5,10,5" BorderBrush="Black" BorderThickness="1,0.5,1,2">
                 <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-                    <TextBlock x:Name="StatementBox" TextWrapping="WrapWithOverflow"/>
+                    <TextBox x:Name="StatementBox" IsReadOnly="True" TextWrapping="WrapWithOverflow" BorderThickness="0,0,0,0"/>
                 </ScrollViewer>
             </Border>
 
             <Border Grid.Column="0" Grid.Row="2" Padding="10,5,10,5" Background="Black" BorderBrush="White" BorderThickness="1,2,0.5,0.5">
                 <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-                    <TextBlock x:Name="SolutionBox" TextWrapping="Wrap" FontFamily="Consolas" Foreground="White"/>
+                    <TextBox x:Name="SolutionBox" IsReadOnly="True" TextWrapping="Wrap" FontFamily="Consolas" Foreground="White" Background="Black" BorderThickness="0,0,0,0"/>
                 </ScrollViewer>
             </Border>
             <Border Grid.Column="1" Grid.Row="2" Padding="10,5,10,5" Background="Black" BorderBrush="White" BorderThickness="0.5,2,1,0.5">
                 <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-                    <TextBlock x:Name="ResultBox" TextWrapping="Wrap" FontFamily="Consolas" Foreground="White"/>
+                    <TextBox x:Name="ResultBox" IsReadOnly="True" TextWrapping="Wrap" FontFamily="Consolas" Foreground="White" Background="Black" BorderThickness="0,0,0,0"/>
                 </ScrollViewer>
             </Border>
 
