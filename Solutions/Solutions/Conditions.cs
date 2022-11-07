@@ -14,7 +14,8 @@ $"Problem Statement\r\n\r\nWrite a code which will check whether a given integer
         public string Link => $"https://codingburgas.org/mod/assign/view.php?id=18683";
         public string Solution =>
 $"public bool IsEven(int num)\r\n{{\r\n\treturn num % 2 == 0;\r\n}}";
-        public TypeCode[] Arguments => new TypeCode[] { TypeCode.Int32 };
+        public ArgumentCode[] Arguments => new ArgumentCode[]
+        { new ArgumentCode(TypeCode.Int32, "Num") };
 
         public bool IsEven(int num)
         {
@@ -35,20 +36,23 @@ $"Problem Statement\r\n\r\nWrite a code which will take:\r\n\r\nTwo float type v
         public string Link => $"https://codingburgas.org/mod/assign/view.php?id=18685";
         public string Solution =>
 $"public double Calculate(double num1, double num2, char op)\r\n{{\r\n\tswitch(op)\r\n\t{{\r\n\t\tcase '+':\r\n\t\t\treturn num1 + num2;\r\n\t\tcase '-':\r\n\t\t\treturn num1 - num2;\r\n\t\tcase '*':\r\n\t\t\treturn num1 * num2;\r\n\t\tcase '/':\r\n\t\t\treturn num1 / num2;\r\n\t}}\r\n\treturn double.NaN;\r\n}}";
-        public TypeCode[] Arguments => new TypeCode[] { TypeCode.Double, TypeCode.Double, TypeCode.Char };
+        public ArgumentCode[] Arguments => new ArgumentCode[]
+        { new ArgumentCode(TypeCode.Double, "a"), 
+          new ArgumentCode(TypeCode.Double, "b"), 
+          new ArgumentCode(TypeCode.Char, "Operation") };
 
-        public double Calculate(double num1, double num2, char op)
+        public double Calculate(double a, double b, char op)
         {
             switch (op)
             {
                 case '+':
-                    return num1 + num2;
+                    return a + b;
                 case '-':
-                    return num1 - num2;
+                    return a - b;
                 case '*':
-                    return num1 * num2;
+                    return a * b;
                 case '/':
-                    return num1 / num2;
+                    return a / b;
             }
             return double.NaN;
         }

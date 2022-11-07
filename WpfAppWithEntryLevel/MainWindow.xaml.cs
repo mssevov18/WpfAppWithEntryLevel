@@ -99,11 +99,17 @@ namespace WpfAppWithEntryLevel
 			{
 				StringBuilder LabelBuilder = new StringBuilder(), BoxBuilder = new StringBuilder();
 
-				foreach (TypeCode code in _container.Arguments)
+				//foreach (TypeCode code in _container.Arguments)
+				//{
+				//	LabelBuilder.Append(code.ToString() + ", ");
+				//	_currentArgs.Add(TypeCodeEx.GetDefaultValue(code));
+				//	BoxBuilder.Append(TypeCodeEx.GetDefaultValue(code) + ", ");
+				//}
+				foreach (ArgumentCode code in _container.Arguments)
 				{
-					LabelBuilder.Append(code.ToString() + ", ");
-					_currentArgs.Add(TypeCodeEx.GetDefaultValue(code));
-					BoxBuilder.Append(TypeCodeEx.GetDefaultValue(code) + ", ");
+					LabelBuilder.Append($"{code.Name}({code.Type.ToString()}), ");
+					_currentArgs.Add(TypeCodeEx.GetDefaultValue(code.Type));
+					BoxBuilder.Append(TypeCodeEx.GetDefaultValue(code.Type) + ", ");
 				}
 				LabelBuilder.Remove(LabelBuilder.Length - 2, 2);
 				BoxBuilder.Remove(BoxBuilder.Length - 2, 2);
@@ -135,7 +141,7 @@ namespace WpfAppWithEntryLevel
 				_currentArgs = ArgumentsBox.Text
 					.Trim()
 					.Split(",")
-					.Select(a => Convert.ChangeType(a.Trim(), _container.Arguments[index++]))
+					.Select(a => Convert.ChangeType(a.Trim(), _container.Arguments[index++].Type))
 					.ToList<object>();
 
 				//StringBuilder @string = new StringBuilder();

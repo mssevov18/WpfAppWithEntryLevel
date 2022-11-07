@@ -16,7 +16,7 @@ namespace Solutions.Solutions
 
 		public string Solution => String.Empty;
 
-		public TypeCode[] Arguments => null;
+		public ArgumentCode[] Arguments => null;
 
 		public string RunSolution(params object[] args)
 		{

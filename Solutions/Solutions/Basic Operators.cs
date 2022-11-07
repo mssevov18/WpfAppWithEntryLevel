@@ -28,7 +28,9 @@ $"public int BooleanOp(int x, int y)" +
  "\n{" +
 $"\n	return ~((x ^ (~x)) & y);" +
  "\n}";
-        public TypeCode[] Arguments => new TypeCode[] { TypeCode.Int32, TypeCode.Int32 };
+        public ArgumentCode[] Arguments => new ArgumentCode[]
+        { new ArgumentCode(TypeCode.Int32, "X"),
+          new ArgumentCode(TypeCode.Int32, "Y") };
 
         public int BooleanOp(int x, int y)
         {
@@ -64,7 +66,9 @@ $"public double SolveBinom(double a, double b)" +
 "\n{" +
 $"\n	return a * a + 2 * a * b + b * b;" +
 "\n}";
-        public TypeCode[] Arguments => new TypeCode[] { TypeCode.Double, TypeCode.Double };
+        public ArgumentCode[] Arguments => new ArgumentCode[]
+        { new ArgumentCode(TypeCode.Double, "a"),
+          new ArgumentCode(TypeCode.Double, "b") };
 
         public double SolveBinom(double a, double b)
         {

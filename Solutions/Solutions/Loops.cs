@@ -16,7 +16,8 @@ namespace Solutions.Solutions
 
 		public string Solution => $"public string Multiply(int num)\r\n{{\r\n\tStringBuilder @string = new StringBuilder();\r\n\r\n\tfor (int i = 1; i < 10; i++)\r\n\t\t@string.AppendLine($\"{{num}} x {{i}} = {{num*i}}\");\r\n\r\n\treturn @string.ToString();\r\n}}";
 
-		public TypeCode[] Arguments => new TypeCode[] { TypeCode.Int32 };
+		public ArgumentCode[] Arguments => new ArgumentCode[]
+		{ new ArgumentCode(TypeCode.Int32, "Number")};
 
 		public string Multiply(int num)
 		{
@@ -44,7 +45,8 @@ namespace Solutions.Solutions
 
 		public string Solution => $"private StringBuilder @string;\r\npublic void Fibonacci(int firstnumber, int secondnumber,\r\n\t\t\t\t\t\t\t\tint count, int length)\r\n{{\r\n\tif (firstnumber > length)\r\n\t\treturn;\r\n\tif (count <= length)\r\n\t{{\r\n\t\t@string.Append($\"{{firstnumber}} \");\r\n\t\tFibonacci(secondnumber, firstnumber + secondnumber, count + 1, length);\r\n\t}}\r\n}}";
 
-		public TypeCode[] Arguments => new TypeCode[] { TypeCode.Int32 };
+		public ArgumentCode[] Arguments => new ArgumentCode[]
+		{ new ArgumentCode(TypeCode.Int32, "Fibonacci") };
 
 		private StringBuilder @string;
 		public void Fibonacci(int firstnumber, int secondnumber,
@@ -77,7 +79,8 @@ namespace Solutions.Solutions
 
 		public string Solution => $"public string PyramidBuilder(int num)\r\n{{\r\n\tStringBuilder @string = new StringBuilder();\r\n\r\n\tfor (int i = 1; i <= num; i++)\r\n\t\t@string.AppendLine(new string('a', i));\r\n\r\n\treturn @string.ToString();\r\n}}";
 
-		public TypeCode[] Arguments => new TypeCode[] { TypeCode.Int32 };
+		public ArgumentCode[] Arguments => new ArgumentCode[]
+		{ new ArgumentCode(TypeCode.Int32, "Size") };
 
 		public string PyramidBuilder(int num)
 		{

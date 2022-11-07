@@ -17,7 +17,9 @@ namespace Solutions.Solutions
 
 		public string Solution => $"public string PascalsTriangle(int height, int spacing)\r\n{{\r\n\tStringBuilder @string = new StringBuilder();\r\n\r\n\tint[,] data = new int[height, height];\r\n\r\n\tfor (int i = 0; i < height; i++)\r\n\t{{\r\n\t\tfor (int j = 0; j < height - i - 1; j++)\r\n\t\t\t@string.Append(\"\".PadRight(spacing / 2));\r\n\r\n\t\tfor (int k = 0; k <= i; k++)\r\n\t\t{{\r\n\t\t\tif (k == 0 || k == i)\r\n\t\t\t\tdata[i, k] = 1;\r\n\t\t\telse\r\n\t\t\t\tdata[i, k] = data[i - 1, k] + data[i - 1, k - 1];\r\n\t\t\t@string.Append(data[i, k].ToString().PadRight(spacing));\r\n\t\t}}\r\n\t\t@string.AppendLine();\r\n\t}}\r\n\treturn @string.ToString();\r\n}}";
 
-		public TypeCode[] Arguments => new TypeCode[] { TypeCode.Int32, TypeCode.Int32 };
+		public ArgumentCode[] Arguments => new ArgumentCode[]
+		{ new ArgumentCode(TypeCode.Int32, "Height"),
+		  new ArgumentCode(TypeCode.Int32, "Padding") };
 
 		public string PascalsTriangle(int height, int spacing)
 		{
@@ -59,7 +61,9 @@ namespace Solutions.Solutions
 
 		public string Solution => $"public string CreateMatrix(int size, int padding)\r\n{{\r\n\tStringBuilder @string = new StringBuilder();\r\n\r\n\tfor (int y = 0; y < size; y++)\r\n\t{{\r\n\t\tfor (int x = 0; x < size; x++)\t\t\t\t\r\n\t\t\t@string.Append(x == 0 ? \r\n\t\t\t\t$\"{{(x == y ? \" 0\" : (x > y) ? \" 1\" : \"-1\")}}\" : \r\n\t\t\t\t$\"{{(x == y ? \" 0\" : (x > y) ? \" 1\" : \"-1\")}}\".PadLeft(padding));\r\n\t\t@string.AppendLine();\r\n\t}}\r\n\r\n\treturn @string.ToString();\r\n}}";
 
-		public TypeCode[] Arguments => new TypeCode[] { TypeCode.Int32, TypeCode.Int32 };
+		public ArgumentCode[] Arguments => new ArgumentCode[]
+		{ new ArgumentCode(TypeCode.Int32, "Size"),
+		  new ArgumentCode(TypeCode.Int32, "Padding") };
 
 		public string CreateMatrix(int size, int padding)
 		{

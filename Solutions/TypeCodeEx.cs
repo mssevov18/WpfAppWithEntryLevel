@@ -6,6 +6,18 @@ using System.Threading.Tasks;
 
 namespace Solutions
 {
+	public struct ArgumentCode
+	{
+		public ArgumentCode(TypeCode type, string name) : this()
+		{
+			Type = type;
+			Name = name;
+		}
+
+		public TypeCode Type { get; set; }
+		public string Name { get; set; }
+	}
+
 	public static class TypeCodeEx
 	{
 		public static object GetDefaultValue(TypeCode typeCode)

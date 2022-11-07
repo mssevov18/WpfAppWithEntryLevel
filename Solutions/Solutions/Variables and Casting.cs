@@ -24,7 +24,7 @@ $"\ndouble doubleNumber = 45.1234d;" +
 $"\nbool boolean = true;" +
 $"\nchar charName = 'u';" +
 $"\nConsole.WriteLine($\"{{intNumber}}, {{floatNumber}}, {{doubleNumber}}, {{boolean}}, {{charName}}\");";
-        public TypeCode[] Arguments => null;
+        public ArgumentCode[] Arguments => null;
 
         public string RunSolution(params object[] args)
         {

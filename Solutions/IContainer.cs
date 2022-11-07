@@ -8,7 +8,8 @@ namespace Solutions
         public string Statement { get; }
         public string Link { get; }
         public string Solution { get; }
-        public TypeCode[] Arguments { get; }
+        //public TypeCode[] Arguments { get; }
+        public ArgumentCode[] Arguments { get; }
 
         public string RunSolution(params object[] args);
     }
