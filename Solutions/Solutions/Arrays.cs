@@ -86,4 +86,54 @@ namespace Solutions.Solutions
 			return CreateMatrix((int)args[0], (int)args[1]);
 		}
 	}
+
+	public class _11 : IContainer
+	{
+		public string Title => "11 Display the Unique Elements";
+
+		public string Statement => $"Problem Statement\r\n\r\nYou have to implement the function findUnique() which, as the name suggests, finds and prints out the unique elements from the given array, separated by a space character.\r\n\r\nExample Input\r\n\r\nint[] input1 = new int[10] {{3, 5, 2, 7, 7, 4, 1, 5, 7, 2}}\r\n\r\nExample Output\r\n\r\n3 4 1";
+
+		public string Link => $"https://codingburgas.org/mod/assign/view.php?id=18705";
+
+		public string Solution => $"public string FindUnique(int[] arr)\r\n{{\r\n\tStringBuilder @string = new StringBuilder();\r\n\tList<int> unique = new List<int>();\r\n\r\n\tforeach (int num in arr)\r\n\t\tif (!unique.Contains(num))\r\n\t\t\tunique.Add(num);\r\n\r\n\tforeach (int num in unique)\r\n\t\t@string.Append($\"{{num}}, \");\r\n\r\n\t@string.Remove(@string.Length - 2, 2);\r\n\r\n\treturn @string.ToString();\r\n}}";
+
+		public ArgumentCode[] Arguments => new ArgumentCode[]
+		{
+			new ArgumentCode(TypeCode.Int32, "a[0]"),
+			new ArgumentCode(TypeCode.Int32, "a[1]"),
+			new ArgumentCode(TypeCode.Int32, "a[2]"),
+			new ArgumentCode(TypeCode.Int32, "a[3]"),
+			new ArgumentCode(TypeCode.Int32, "a[4]"),
+			new ArgumentCode(TypeCode.Int32, "a[5]"),
+		};
+
+		public string FindUnique(int[] arr)
+		{
+			StringBuilder @string = new StringBuilder();
+			List<int> unique = new List<int>();
+
+			foreach (int num in arr)
+				if (!unique.Contains(num))
+					unique.Add(num);
+
+			foreach (int num in unique)
+				@string.Append($"{num}, ");
+
+			@string.Remove(@string.Length - 2, 2);
+
+			return @string.ToString();
+		}
+
+		public string RunSolution(params object[] args)
+		{
+			return FindUnique(new int[] {
+				(int)args[0], 
+				(int)args[1], 
+				(int)args[2], 
+				(int)args[3], 
+				(int)args[4], 
+				(int)args[5], 
+			});
+		}
+	}
 }

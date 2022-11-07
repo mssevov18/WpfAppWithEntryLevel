@@ -44,6 +44,7 @@ namespace WpfAppWithEntryLevel
 			_exercises.Add(new _08());
 			_exercises.Add(new _09());
 			_exercises.Add(new _10());
+			_exercises.Add(new _11());
 
 			InitializeComponent();
 
@@ -99,15 +100,11 @@ namespace WpfAppWithEntryLevel
 			{
 				StringBuilder LabelBuilder = new StringBuilder(), BoxBuilder = new StringBuilder();
 
-				//foreach (TypeCode code in _container.Arguments)
-				//{
-				//	LabelBuilder.Append(code.ToString() + ", ");
-				//	_currentArgs.Add(TypeCodeEx.GetDefaultValue(code));
-				//	BoxBuilder.Append(TypeCodeEx.GetDefaultValue(code) + ", ");
-				//}
+				//Add Names, Types to Arguments Label/TextBox
 				foreach (ArgumentCode code in _container.Arguments)
 				{
-					LabelBuilder.Append($"{code.Name}({code.Type.ToString()}), ");
+					LabelBuilder.Append(
+$"{code.Name}({code.Type}), ");
 					_currentArgs.Add(TypeCodeEx.GetDefaultValue(code.Type));
 					BoxBuilder.Append(TypeCodeEx.GetDefaultValue(code.Type) + ", ");
 				}
@@ -132,17 +129,70 @@ namespace WpfAppWithEntryLevel
 		private void SendArgumentsButton_Click(object sender, RoutedEventArgs e)
 		{
 			//Check data
-			_container = _exercises
-				.Find(e => e.Title == (string)(_exerciseButton).Content);
-			int index = 0;
 			try
 			{
+				_currentArgs.Clear();
 
-				_currentArgs = ArgumentsBox.Text
-					.Trim()
-					.Split(",")
-					.Select(a => Convert.ChangeType(a.Trim(), _container.Arguments[index++].Type))
-					.ToList<object>();
+				string rawargs = ArgumentsBox.Text;
+				int index = 0;
+
+				_container = _exercises
+								.Find(e =>
+									e.Title == (string)(_exerciseButton)
+													.Content);
+
+				//_currentArgs = ArgumentsBox.Text
+				//	.Trim()
+				//	.Split(",")
+				//	.Select(a => Convert.ChangeType(a.Trim(), _container.Arguments[index++].Type))
+				//	.ToList<object>();
+
+				//while (rawargs.Contains('{') &&
+				//	   rawargs.Contains('}') &&
+				//	   _container.Arguments.Select(arg => arg.IsArray == true).Count() >= 1)
+				//{
+				//	int temp1, temp2;
+				//	_currentArgs.Add(rawargs.Substring(temp1 = rawargs.IndexOf('{'),
+				//								   temp2 = rawargs.IndexOf('}', temp1))
+				//					 .Replace('{', ' ')
+				//					 .Replace('}', ' ')
+				//					 .Trim()
+				//					 .Split(',')
+				//					 .Select(a =>
+				//						Convert
+				//						.ChangeType(a.Trim(),
+				//									_container
+				//										.Arguments[index]
+				//										.Type))
+				//					 .ToArray());
+				//	index++;
+				//	rawargs = rawargs.Substring(temp2 + 1);
+				//	if (rawargs.Length == 0)
+				//		break;
+				//}
+
+				//if (rawargs.Length != 0)
+				//	_currentArgs.Add(rawargs
+				//		.Trim()
+				//		.Split(",")
+				//		.Select(a =>
+				//			Convert
+				//			.ChangeType(a.Trim(),
+				//						_container
+				//							.Arguments[index++]
+				//							.Type))
+				//		.ToList<object>());
+				if (rawargs.Length != 0)
+					foreach (var item in rawargs
+						.Trim()
+						.Split(",")
+						.Select(a =>
+							Convert
+							.ChangeType(a.Trim(),
+										_container
+											.Arguments[index++]
+											.Type)))
+						_currentArgs.Add(item);
 
 				//StringBuilder @string = new StringBuilder();
 				//index = 1;
@@ -161,7 +211,7 @@ namespace WpfAppWithEntryLevel
 			catch (Exception ex)
 			{
 				e.Handled = false;
-				MessageBox.Show(ex.Message);
+				MessageBox.Show($"{ex.Message}\n\n{ex.StackTrace}");
 			}
 		}
 

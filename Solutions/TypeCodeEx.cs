@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Solutions
@@ -22,7 +24,7 @@ namespace Solutions
 	{
 		public static object GetDefaultValue(TypeCode typeCode)
 		{
-			switch(typeCode)
+			switch (typeCode)
 			{
 				case TypeCode.Int32:
 					return 5;
@@ -34,6 +36,8 @@ namespace Solutions
 					return "Lorem";
 				case TypeCode.Double:
 					return 13.5d;
+				case TypeCode.Object:
+					return null;
 			}
 			return null;
 		}
