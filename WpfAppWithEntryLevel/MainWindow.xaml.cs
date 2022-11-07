@@ -43,6 +43,7 @@ namespace WpfAppWithEntryLevel
 			_exercises.Add(new _07());
 			_exercises.Add(new _08());
 			_exercises.Add(new _09());
+			_exercises.Add(new _10());
 
 			InitializeComponent();
 

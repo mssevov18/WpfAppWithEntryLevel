@@ -13,7 +13,7 @@ namespace Solutions
 			switch(typeCode)
 			{
 				case TypeCode.Int32:
-					return 72;
+					return 5;
 				case TypeCode.Boolean:
 					return true;
 				case TypeCode.Char:
